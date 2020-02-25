@@ -1,4 +1,4 @@
-
+#!/bin/env python3
 
 import logging, threading, time, random, uuid, threading, requests, json, sys, signal
 
