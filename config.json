@@ -20,6 +20,6 @@
     "login_connection_reset_error_chance": 0.01,
     "number_of_users_online": 1000,
     "change_logger": true,
-    "log_level": "DEBUG",
+    "log_level": "INFO",
     "sleep_time": 0.1
 }
