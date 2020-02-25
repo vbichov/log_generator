@@ -110,7 +110,7 @@ def config_changer_thread():
     if not(CONTINUE_RUNNING):
       return
     try:
-      res = requests.get('http://repo_name')
+      res = requests.get('https://raw.githubusercontent.com/vbichov/log_generator/master/config.json')
       res.raise_for_status()
       res_json = res.json()
       CONFIG = res_json
