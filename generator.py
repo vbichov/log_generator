@@ -99,6 +99,7 @@ def run():
   except KeyboardInterrupt:
     global CONTINUE_RUNNING
     CONTINUE_RUNNING = False
+    print("exiting in 30sec or less")
     sys.exit()
 
 ################################# config update from the web #################################
@@ -113,12 +114,13 @@ def config_changer_thread():
       res = requests.get('https://raw.githubusercontent.com/vbichov/log_generator/master/config.json')
       res.raise_for_status()
       res_json = res.json()
+      print("attempting to change config")
       CONFIG = res_json
       if res_json['change_logger'] == True:
         global logger
         logger = _update_logger()
     except:
-      pass
+      print("could not get config change")
     finally:
       time.sleep(30)
 
