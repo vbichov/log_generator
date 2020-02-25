@@ -1,6 +1,6 @@
 #!/bin/env python3
 
-import logging, threading, time, random, uuid, threading, requests, json, sys, signal
+import logging, threading, time, random, uuid, threading, requests, json, sys, signal, string
 
 logged_in_users_list = []
 
@@ -23,12 +23,16 @@ def _update_logger():
 LOGGED_IN_USERS = []
 logger = _update_logger()
 
-
+def randomString(stringLength=3):
+    """Generate a random string of fixed length """
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
   
 
 def login():
   time.sleep(CONFIG['sleep_time'])
-  logging_in_user =  CONFIG['users_list'][random.randrange(0, len(CONFIG['users_list']))]
+  logging_in_user_name_template = CONFIG['users_list'][random.randrange(0, len(CONFIG['users_list']))]
+  logging_in_user = logging_in_user_name_template.format(name=randomString())
   users_ip_cidr = CONFIG['ip_address_list'][random.randrange(0, len(CONFIG['ip_address_list']))]
   users_ip = users_ip_cidr.format(random.randrange(1,255))
   metadata = {'clientip': users_ip, 'user' : logging_in_user, 'uid': str(uuid.uuid1())}
