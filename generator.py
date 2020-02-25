@@ -1,13 +1,14 @@
 #!/bin/env python3
 
 import logging, threading, time, random, uuid, threading, requests, json, sys, signal, string
+from logging.handlers import RotatingFileHandler
 
 logged_in_users_list = []
 
 
 logging.getLogger("urllib3").setLevel(logging.ERROR)
 LOGGING_FORMAT = 't="%(asctime)-15s" lvl=%(levelname)s func="%(funcName)s" client="%(clientip)s" uid=%(uid)s user="%(user)s" msg="%(message)s"'
-logging.basicConfig(format=LOGGING_FORMAT)
+# logging.basicConfig(format=LOGGING_FORMAT)
 
 
 CONTINUE_RUNNING = True
@@ -17,11 +18,16 @@ CONFIG = json.load(open('config.json'))
 
 def _update_logger():
   lgr = logging.getLogger()
+  handler = RotatingFileHandler('sample_log.log', maxBytes=1<<23, backupCount=3)
+  formatter = logging.Formatter(fmt=LOGGING_FORMAT)
+  handler.setFormatter(formatter)
+  lgr.addHandler(handler)
   lgr.setLevel(logging.getLevelName(CONFIG['log_level']))
   return lgr
 
 LOGGED_IN_USERS = []
 logger = _update_logger()
+
 
 def randomString(stringLength=3):
     """Generate a random string of fixed length """
