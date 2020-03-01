@@ -21,6 +21,7 @@ def _update_logger():
   handler = RotatingFileHandler('sample_log.log', maxBytes=1<<23, backupCount=3)
   formatter = logging.Formatter(fmt=LOGGING_FORMAT)
   handler.setFormatter(formatter)
+  lgr.handlers = []
   lgr.addHandler(handler)
   lgr.setLevel(logging.getLevelName(CONFIG['log_level']))
   return lgr
