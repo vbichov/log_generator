@@ -14,7 +14,7 @@
     "should_add_something_to_cart_chance": 0.1,
     "should_checkout_chance": 0.1,
     "checkout_connection_reset_error_chance": 0.01,
-    "credit_card_not_valid_chance": 0.8,
+    "credit_card_not_valid_chance": 0.05,
     "login_unauthorized_chance": 0.08,
     "login_connection_reset_error_chance": 0.01,
     "number_of_users_online": 1000,
